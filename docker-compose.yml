@@ -1,0 +1,65 @@
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: smarthire-mongodb
+
+    restart: always
+
+    ports:
+      - '27017:27017'
+
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: smarthire-redis
+
+    restart: always
+
+    ports:
+      - '6379:6379'
+
+  server:
+    build:
+      context: ./apps/server
+
+    container_name: smarthire-server
+
+    restart: always
+
+    ports:
+      - '5000:5000'
+
+    env_file:
+      - ./apps/server/.env
+
+    depends_on:
+      - mongodb
+      - redis
+
+    volumes:
+      - ./apps/server:/app
+      - /app/node_modules
+
+  client:
+    build:
+      context: ./apps/client
+
+    container_name: smarthire-client
+
+    restart: always
+
+    ports:
+      - '3000:3000'
+
+    depends_on:
+      - server
+
+    volumes:
+      - ./apps/client:/app
+      - /app/node_modules
+
+volumes:
+  mongodb_data:
