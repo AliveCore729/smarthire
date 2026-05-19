@@ -8,6 +8,7 @@ import rateLimit from 'express-rate-limit';
 import authRoutes from './modules/auth/auth.routes.js';
 import protectedRoutes from './modules/auth/auth.protected.js';
 import resumeRoutes from './modules/resume/resume.routes.js';
+import jobMatchRoutes from './modules/job-match/job-match.routes.js';
 
 import { errorMiddleware } from './common/middlewares/error.middleware.js';
 
@@ -51,6 +52,10 @@ app.get('/health', (_req, res) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/protected', protectedRoutes);
 app.use('/api/v1/resume', resumeRoutes);
+app.use(
+  '/api/v1/job-match',
+  jobMatchRoutes,
+);
 
 app.use(errorMiddleware);
 
