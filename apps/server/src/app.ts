@@ -9,8 +9,11 @@ import authRoutes from './modules/auth/auth.routes.js';
 import protectedRoutes from './modules/auth/auth.protected.js';
 import resumeRoutes from './modules/resume/resume.routes.js';
 import jobMatchRoutes from './modules/job-match/job-match.routes.js';
+import applicationRoutes from './modules/application/application.routes.js';
 
 import { errorMiddleware } from './common/middlewares/error.middleware.js';
+
+import { env } from './config/env.js';
 
 const app = express();
 
@@ -22,7 +25,7 @@ app.use(
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: env.CLIENT_URL,
     credentials: true,
   }),
 );
@@ -56,6 +59,7 @@ app.use(
   '/api/v1/job-match',
   jobMatchRoutes,
 );
+app.use('/api/v1/applications', applicationRoutes);
 
 app.use(errorMiddleware);
 

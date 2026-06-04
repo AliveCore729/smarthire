@@ -18,4 +18,15 @@ router.post(
   ResumeController.uploadResume,
 );
 
+router.get(
+  '/latest',
+  protect,
+  ResumeController.getLatestResumeAnalysis,
+);
+router.get(
+  '/history',
+  protect,
+  ResumeController.getResumeHistory,
+);
+
 export default router;

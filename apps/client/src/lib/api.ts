@@ -18,24 +18,29 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If the error is 401 Unauthorized and we haven't already retried this request
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // We do NOT want to intercept 401s on login, register, or refresh routes
+    const isAuthRoute = 
+      originalRequest.url?.includes('/auth/login') || 
+      originalRequest.url?.includes('/auth/register') ||
+      originalRequest.url?.includes('/auth/refresh-token');
+
+    // If it's a 401, we haven't retried yet, AND it's not an auth route
+    if (error.response?.status === 401 && !originalRequest._retry && !isAuthRoute) {
       originalRequest._retry = true;
 
       try {
-        // Attempt to refresh the token using the HttpOnly refresh cookie.
         await axios.post(
           `${baseURL}/auth/refresh-token`,
           {},
           { withCredentials: true }
         );
-
-        // If refresh succeeds, retry the original failed request immediately.
         return api(originalRequest);
         
       } catch (refreshError) {
-        // If the refresh fails, force the user to log in again.
-        if (typeof window !== 'undefined') {
+        // Only force a redirect if the user isn't already on the login/register pages
+        if (typeof window !== 'undefined' && 
+            !window.location.pathname.startsWith('/login') && 
+            !window.location.pathname.startsWith('/register')) {
           window.location.href = '/login';
         }
         return Promise.reject(refreshError);

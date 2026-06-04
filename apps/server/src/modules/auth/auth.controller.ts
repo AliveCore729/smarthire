@@ -40,17 +40,19 @@ export class AuthController {
     const isProduction =
       env.NODE_ENV === 'production';
 
-    res.cookie('accessToken', accessToken, {
+    const cookieOptions = {
       httpOnly: true,
-      secure: isProduction,
-      sameSite: 'strict',
+      secure: true,
+      sameSite: 'none' as const,
+    };
+
+    res.cookie('accessToken', accessToken, {
+      ...cookieOptions,
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: 'strict',
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -65,6 +67,62 @@ export class AuthController {
         role: user.role,
       },
     });
+  }
+
+  static async googleAuth(req: Request, res: Response) {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ success: false, message: 'Google token is required' });
+    }
+
+    try {
+      const { user, accessToken, refreshToken } = await AuthService.googleAuth(token);
+
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none' as const,
+      };
+
+      res.cookie('accessToken', accessToken, {
+        ...cookieOptions,
+        maxAge: 15 * 60 * 1000,
+      });
+
+      res.cookie('refreshToken', refreshToken, {
+        ...cookieOptions,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Google login successful',
+        data: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
+    } catch (error: any) {
+      return res.status(400).json({ success: false, message: error.message || 'Google auth failed' });
+    }
+  }
+
+  static async verifyEmail(req: Request, res: Response) {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ success: false, message: 'Verification token is required' });
+    }
+
+    try {
+      const result = await AuthService.verifyEmail(token);
+      return res.status(200).json({ success: true, message: result.message });
+    } catch (error: any) {
+      return res.status(400).json({ success: false, message: error.message || 'Email verification failed' });
+    }
   }
 
   static async refreshToken(req: Request, res: Response) {
@@ -103,13 +161,10 @@ export class AuthController {
           user.role,
         );
 
-      const isProduction =
-        env.NODE_ENV === 'production';
-
       res.cookie('accessToken', newAccessToken, {
         httpOnly: true,
-        secure: isProduction,
-        sameSite: 'strict',
+        secure: true,
+        sameSite: 'none',
         maxAge: 15 * 60 * 1000,
       });
 
@@ -126,22 +181,45 @@ export class AuthController {
   }
 
   static async logout(
-    _req: Request,
-    res: Response,
-  ) {
-    res.clearCookie('accessToken');
+  _req: Request,
+  res: Response,
+) {
+  res.clearCookie('accessToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
 
-    res.clearCookie('refreshToken');
+  res.clearCookie('refreshToken', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  });
 
-    return res.status(200).json({
-      success: true,
-      message: 'Logout successful',
-    });
-  }
+  return res.status(200).json({
+    success: true,
+    message: 'Logout successful',
+  });
+}
 
   static async me(req: any, res: Response) {
     const user = await User.findById(
       req.user.userId,
+    ).select('-password');
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  }
+
+  static async updateProfile(req: any, res: Response) {
+    const { name, title, bio } = req.body;
+    
+    const user = await User.findByIdAndUpdate(
+      req.user.userId,
+      { name, title, bio },
+      { new: true, runValidators: true }
     ).select('-password');
 
     return res.status(200).json({

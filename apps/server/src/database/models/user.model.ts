@@ -3,8 +3,14 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IUser extends Document {
   name: string;
   email: string;
-  password: string;
+  password?: string;
   role: 'user' | 'admin';
+  authProvider: 'local' | 'google';
+  isVerified: boolean;
+  verificationToken?: string;
+  verificationTokenExpiresAt?: Date;
+  title?: string;
+  bio?: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -25,14 +31,45 @@ const userSchema = new Schema<IUser>(
 
     password: {
       type: String,
-      required: true,
+      required: false,
       minlength: 6,
+    },
+
+    authProvider: {
+      type: String,
+      enum: ['local', 'google'],
+      default: 'local',
     },
 
     role: {
       type: String,
       enum: ['user', 'admin'],
       default: 'user',
+    },
+
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+
+    verificationToken: {
+      type: String,
+    },
+
+    verificationTokenExpiresAt: {
+      type: Date,
+    },
+
+    title: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+
+    bio: {
+      type: String,
+      trim: true,
+      default: '',
     },
   },
 

@@ -2,7 +2,7 @@ import { ResumeAnalysis } from '../../database/models/resume-analysis.model.js';
 
 import { JobMatch } from '../../database/models/job-match.model.js';
 
-import { analyzeJobMatch } from '../../common/utils/job-match.util.js';
+import { compareResumeWithJob } from '../../common/utils/gemini.util.js';
 
 export class JobMatchService {
   static async matchResume(
@@ -20,11 +20,7 @@ export class JobMatchService {
       );
     }
 
-    const result =
-      analyzeJobMatch(
-        analysis.skills,
-        jobDescription,
-      );
+    const result = await compareResumeWithJob(analysis.extractedText, jobDescription);
 
     const jobMatch =
       await JobMatch.create({

@@ -1,9 +1,9 @@
-import { AnyZodObject } from 'zod';
+import { ZodTypeAny } from 'zod';
 
 import { NextFunction, Request, Response } from 'express';
 
 export const validate =
-  (schema: AnyZodObject) =>
+  (schema: ZodTypeAny) =>
   (
     req: Request,
     res: Response,

@@ -1,3 +1,10 @@
 packages:
   - "apps/*"
   - "packages/*"
+allowBuilds:
+  '0': esbuild
+  '1': sharp
+  '2': unrs-resolver
+  esbuild: false
+  sharp: false
+  unrs-resolver: false

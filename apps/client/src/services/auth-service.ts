@@ -6,6 +6,8 @@ export interface User {
   name: string;
   email: string;
   role?: string;
+  title?: string;
+  bio?: string;
 }
 
 export interface AuthResponse {
@@ -25,6 +27,16 @@ export const authService = {
     return data;
   },
 
+  googleLogin: async (token: string) => {
+    const { data } = await api.post<AuthResponse>('/auth/google', { token });
+    return data;
+  },
+
+  verifyEmail: async (token: string) => {
+    const { data } = await api.post<{ success: boolean; message: string }>('/auth/verify-email', { token });
+    return data;
+  },
+
   logout: async () => {
     const { data } = await api.post('/auth/logout');
     return data;
@@ -39,6 +51,11 @@ export const authService = {
   // behind the scenes, but we can expose it here if manual calls are needed.
   refreshToken: async () => {
     const { data } = await api.post('/auth/refresh-token');
+    return data;
+  },
+
+  updateProfile: async (userData: Partial<User>) => {
+    const { data } = await api.patch<AuthResponse>('/auth/profile', userData);
     return data;
   }
 };

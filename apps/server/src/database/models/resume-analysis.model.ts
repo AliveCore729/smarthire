@@ -1,29 +1,51 @@
-import mongoose, {
-  Schema,
-  Document,
-} from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-export interface IResumeAnalysis
-  extends Document {
-  resume: mongoose.Types.ObjectId;
+export interface IResumeAnalysis extends Document {
+  userId: mongoose.Types.ObjectId;
+
+  resumeName: string;
+
+  resumeUrl: string;
 
   extractedText: string;
 
+  atsScore: number;
+
   skills: string[];
+
+  missingSkills: string[];
 
   experience: string[];
 
   education: string[];
 
-  atsScore: number;
+  projects: string[];
+
+  suggestions: string[];
+
+  summary: string;
+
+  createdAt: Date;
+
+  updatedAt: Date;
 }
 
-const resumeAnalysisSchema =
+const ResumeAnalysisSchema =
   new Schema<IResumeAnalysis>(
     {
-      resume: {
+      userId: {
         type: Schema.Types.ObjectId,
-        ref: 'Resume',
+        ref: 'User',
+        required: true,
+      },
+
+      resumeName: {
+        type: String,
+        required: true,
+      },
+
+      resumeUrl: {
+        type: String,
         required: true,
       },
 
@@ -32,7 +54,18 @@ const resumeAnalysisSchema =
         required: true,
       },
 
+      atsScore: {
+        type: Number,
+        default: 0,
+      },
+
       skills: [
+        {
+          type: String,
+        },
+      ],
+
+      missingSkills: [
         {
           type: String,
         },
@@ -50,12 +83,23 @@ const resumeAnalysisSchema =
         },
       ],
 
-      atsScore: {
-        type: Number,
-        default: 0,
+      projects: [
+        {
+          type: String,
+        },
+      ],
+
+      suggestions: [
+        {
+          type: String,
+        },
+      ],
+
+      summary: {
+        type: String,
+        default: '',
       },
     },
-
     {
       timestamps: true,
     },
@@ -64,5 +108,5 @@ const resumeAnalysisSchema =
 export const ResumeAnalysis =
   mongoose.model<IResumeAnalysis>(
     'ResumeAnalysis',
-    resumeAnalysisSchema,
+    ResumeAnalysisSchema,
   );

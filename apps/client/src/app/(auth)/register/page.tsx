@@ -7,7 +7,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { Loader2, AlertCircle } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   
   const { loginWithGoogle, isLoading, error } = useAuthStore();
@@ -30,14 +30,14 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-pink-100 flex items-center justify-center p-4 selection:bg-lime-300 selection:text-slate-900">
-      <div className="max-w-md w-full bg-white rounded-sm border-2 border-slate-900 shadow-[8px_8px_0px_#0f172a] p-8 lg:p-10">
+      <div className="max-w-md w-full bg-white rounded-sm border-2 border-slate-900 shadow-[8px_8px_0px_#0f172a] p-8 lg:p-10 my-8">
         
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-lime-300 border-2 border-slate-900 rounded-sm flex items-center justify-center font-black text-slate-900 text-3xl mx-auto mb-6 shadow-[4px_4px_0px_#0f172a] transform -rotate-3">
+          <div className="w-16 h-16 bg-sky-300 border-2 border-slate-900 rounded-sm flex items-center justify-center font-black text-slate-900 text-3xl mx-auto mb-6 shadow-[4px_4px_0px_#0f172a] transform rotate-3">
             S
           </div>
-          <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Welcome Back</h1>
-          <p className="text-slate-600 mt-2 font-bold uppercase text-sm tracking-wide">Sign in to your enterprise portal.</p>
+          <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Create Account</h1>
+          <p className="text-slate-600 mt-2 font-bold uppercase text-sm tracking-wide">Join SmartHire AI today.</p>
         </div>
 
         {error && (
@@ -65,12 +65,11 @@ export default function LoginPage() {
         </button>
 
         <div className="mt-8 text-center text-sm text-slate-900 font-bold uppercase tracking-wide">
-          Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-blue-700 hover:text-blue-800 underline decoration-2 transition-colors">
-            Sign up
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-700 hover:text-blue-800 underline decoration-2 transition-colors">
+            Sign in
           </Link>
         </div>
-
       </div>
     </div>
   );

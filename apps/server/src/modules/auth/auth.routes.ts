@@ -26,6 +26,16 @@ router.post(
 );
 
 router.post(
+  '/google',
+  AuthController.googleAuth,
+);
+
+router.post(
+  '/verify-email',
+  AuthController.verifyEmail,
+);
+
+router.post(
   '/refresh-token',
   AuthController.refreshToken,
 );
@@ -39,6 +49,12 @@ router.get(
   '/me',
   protect,
   AuthController.me,
+);
+
+router.patch(
+  '/profile',
+  protect,
+  AuthController.updateProfile,
 );
 
 export default router;
