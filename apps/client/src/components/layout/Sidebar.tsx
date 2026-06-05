@@ -10,6 +10,7 @@ import {
   Settings,
   HelpCircle,
   LogOut,
+  X,
 } from "lucide-react";
 
 import { useAuthStore } from "@/store/auth-store";
@@ -37,7 +38,7 @@ const navItems = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, avatarUrl } = useAuthStore();
@@ -55,9 +56,9 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-white text-slate-900 flex flex-col h-full shrink-0 border-r-2 border-slate-900 relative z-10">
+    <aside className={`fixed md:relative top-0 left-0 w-64 bg-white text-slate-900 flex flex-col h-full shrink-0 border-r-2 border-slate-900 z-50 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}>
       {/* Logo Area */}
-      <div className="h-16 flex items-center px-6 border-b-2 border-slate-900 bg-lime-300">
+      <div className="h-16 flex items-center justify-between px-6 border-b-2 border-slate-900 bg-lime-300 shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-slate-900 rounded-sm flex items-center justify-center font-bold text-lime-300 border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a]">
             S
@@ -65,14 +66,22 @@ export function Sidebar() {
 
           <div>
             <h1 className="text-white font-semibold text-lg leading-tight">
-              SmartHire AI
+              SmartHire
             </h1>
 
-            <p className="text-xs text-slate-400">
-              Enterprise Portal
+            <p className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">
+              Enterprise
             </p>
           </div>
         </div>
+
+        {/* Mobile Close Button */}
+        <button 
+          onClick={onClose}
+          className="md:hidden text-slate-900 hover:scale-110 transition-transform p-1 bg-white border-2 border-slate-900 rounded-sm shadow-[2px_2px_0px_#0f172a]"
+        >
+          <X className="w-4 h-4" />
+        </button>
       </div>
 
       {/* Main Navigation */}
@@ -86,6 +95,9 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={() => {
+                if (onClose) onClose();
+              }}
               className={`group flex items-center gap-3 px-3 py-2.5 rounded-sm transition-all duration-150 text-sm font-bold border-2 ${
                 isActive
                   ? "bg-lime-300 text-slate-900 border-slate-900 shadow-[2px_2px_0px_#0f172a] -translate-y-0.5"

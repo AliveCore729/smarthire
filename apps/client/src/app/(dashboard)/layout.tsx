@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -24,6 +24,8 @@ export default function DashboardLayout({
     isLoading,
     checkAuth,
   } = useAuthStore();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Run auth check ONCE when layout mounts
   useEffect(() => {
@@ -61,13 +63,22 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen w-full bg-[#FDFBF7] overflow-hidden text-slate-900 font-sans selection:bg-lime-300">
-      <Sidebar />
+    <div className="flex h-screen w-full bg-[#FDFBF7] overflow-hidden text-slate-900 font-sans selection:bg-lime-300 relative">
+      
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
-      <div className="flex-1 flex flex-col h-full overflow-hidden">
-        <TopNav />
+      <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-        <main className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 flex flex-col h-full overflow-hidden w-full relative">
+        <TopNav onMenuToggle={() => setIsMobileMenuOpen(true)} />
+
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
         </main>
       </div>
