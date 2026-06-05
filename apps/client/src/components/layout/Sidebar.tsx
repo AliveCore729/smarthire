@@ -120,15 +120,6 @@ export function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () =>
 
       {/* Footer Navigation */}
       <div className="p-4 border-t-2 border-slate-900 space-y-2 bg-[#FDFBF7]">
-        <Link
-          href="/help"
-          className="flex items-center gap-3 px-3 py-2 rounded-sm border-2 border-transparent hover:border-slate-900 hover:bg-sky-200 hover:shadow-[2px_2px_0px_#0f172a] hover:-translate-y-0.5 transition-all text-sm font-bold text-slate-600 hover:text-slate-900"
-        >
-          <HelpCircle className="w-5 h-5" />
-
-          Help Center
-        </Link>
-
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-3 py-2 rounded-sm border-2 border-transparent hover:border-slate-900 hover:bg-pink-300 hover:shadow-[2px_2px_0px_#0f172a] hover:-translate-y-0.5 transition-all text-sm font-bold text-slate-600 hover:text-slate-900"
