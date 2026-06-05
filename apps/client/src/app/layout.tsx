@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmartHire AI | Enterprise Portal",
-  description: "AI-powered recruitment intelligence platform.",
+  title: "SmartHire",
+  description: "Intelligent AI Recruitment Platform",
 };
 
 export default function RootLayout({
