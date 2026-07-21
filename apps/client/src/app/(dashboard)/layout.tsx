@@ -63,7 +63,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen w-full bg-[#FDFBF7] overflow-hidden text-slate-900 font-sans selection:bg-lime-300 relative">
+    <div className="flex h-screen w-full bg-[#0a0a0a] overflow-hidden text-slate-100 font-sans selection:bg-cyan-500/30 relative">
       
       {/* Mobile Backdrop */}
       {isMobileMenuOpen && (
