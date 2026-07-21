@@ -132,8 +132,7 @@ export default function LandingPage() {
       
       <header className={styles.header}>
         <div className={styles.logo}>
-          <div className={`${styles.logoBadge} ${spaceGrotesk.className}`}>S</div>
-          <div className={`${styles.logoName} ${spaceGrotesk.className}`}>SmartHire<span className={jetbrainsMono.className}>Enterprise</span></div>
+          <div className={`${styles.logoName} ${spaceGrotesk.className}`}>SmartHire</div>
         </div>
         <nav className={styles.links}>
           <Link href="#" className={jetbrainsMono.className}>Product</Link>

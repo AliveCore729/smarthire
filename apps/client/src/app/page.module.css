@@ -42,8 +42,7 @@
   transform: rotate(-6deg);
   box-shadow: 3px 3px 0 var(--ink);
 }
-.logoName { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; }
-.logoName span { display: block; font-weight: 500; font-size: .6rem; letter-spacing: .14em; color: rgba(20,21,43,.6); margin-top: -2px; }
+.logoName { font-weight: 800; font-size: 2rem; letter-spacing: -0.02em; }
 
 .links { display: flex; gap: 34px; }
 .links a {
@@ -159,13 +158,13 @@
 .paperStage {
   position: relative; z-index: 2;
   height: min(560px,58vh);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: flex-end;
   perspective: 1500px;
 }
 
 .paper {
   position: relative;
-  width: min(320px,78vw); height: min(420px,52vh);
+  width: min(440px,78vw); height: min(540px,60vh);
   background: var(--white);
   border: var(--border-w) solid var(--ink);
   box-shadow: 14px 14px 0 rgba(20,21,43,.85);
