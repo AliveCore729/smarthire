@@ -49,7 +49,7 @@ export function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () =>
     try {
       await logout();
 
-      window.location.href = "/login";
+      window.location.href = "/";
     } catch (error) {
       console.error("Logout failed:", error);
     }

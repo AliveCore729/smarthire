@@ -37,11 +37,11 @@ api.interceptors.response.use(
         return api(originalRequest);
         
       } catch (refreshError) {
-        // Only force a redirect if the user isn't already on the login/register pages
+        // Only force a redirect if the user isn't already on the landing page
         if (typeof window !== 'undefined' && 
-            !window.location.pathname.startsWith('/login') && 
+            window.location.pathname !== '/' && 
             !window.location.pathname.startsWith('/register')) {
-          window.location.href = '/login';
+          window.location.href = '/';
         }
         return Promise.reject(refreshError);
       }

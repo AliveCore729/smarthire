@@ -240,7 +240,7 @@ export default function LandingPage() {
             )}
             Continue with Google
           </button>
-          <div className={styles.modalFoot}>Don&apos;t have an account? <Link href="/register"><b>Sign up</b></Link></div>
+          <div className={styles.modalFoot}>Don&apos;t have an account? <button onClick={() => handleGoogleLogin()} disabled={isLoading}><b>Sign up</b></button></div>
         </div>
       </div>
 
