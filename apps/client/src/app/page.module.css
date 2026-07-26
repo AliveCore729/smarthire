@@ -204,6 +204,66 @@
 .statCol b { font-size: 2rem; font-weight: 900; line-height: 1; }
 .statCol small { font-size: .65rem; font-weight: 800; text-transform: uppercase; margin-top: 4px; }
 
+/* ---------- content sections ---------- */
+.contentSection {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  padding: 0 5vw;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  z-index: 10;
+  position: relative;
+}
+
+.sectionCard {
+  flex: 1;
+  min-width: 300px;
+  background: var(--white);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 40px;
+  border-radius: 16px;
+}
+.sectionCard h2 {
+  font-weight: 900;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.sectionCard p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.bgYellow {
+  background: var(--yellow);
+}
+
+.largeCard {
+  width: 100%;
+  background: var(--white);
+  color: var(--ink);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 60px;
+  border-radius: 16px;
+}
+.largeCard h2 {
+  font-weight: 900;
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.largeCard p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
 
 /* ---------- modal ---------- */
 .overlay {

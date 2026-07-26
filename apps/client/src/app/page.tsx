@@ -85,10 +85,9 @@ export default function LandingPage() {
             <div className={`${styles.logoName} ${spaceGrotesk.className}`}>SmartHire</div>
           </div>
           <nav className={styles.links}>
-            <Link href="#" className={jetbrainsMono.className}>Product</Link>
-            <Link href="#" className={jetbrainsMono.className}>Resource</Link>
-            <Link href="#" className={jetbrainsMono.className}>Price</Link>
-            <Link href="#" className={jetbrainsMono.className}>About Us</Link>
+            <Link href="#product" className={jetbrainsMono.className}>Product</Link>
+            <Link href="#resource" className={jetbrainsMono.className}>Resource</Link>
+            <Link href="#about-us" className={jetbrainsMono.className}>About Us</Link>
           </nav>
           <div className={styles.headerActions}>
             <button className={`${styles.loginBtn} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
@@ -132,6 +131,31 @@ export default function LandingPage() {
         <h2 className={spaceGrotesk.className}>
           Track your applications and<br/>enjoy ATS optimization every day.
         </h2>
+      </section>
+
+      <section id="product" className={styles.contentSection}>
+        <div className={styles.sectionCard}>
+          <h2 className={spaceGrotesk.className}>Our Product</h2>
+          <p className={spaceGrotesk.className}>SmartHire automatically scores your resume against industry standards for ATS systems, so you always know exactly where you stand before applying.</p>
+        </div>
+        <div className={`${styles.sectionCard} ${styles.bgYellow}`}>
+          <h2 className={spaceGrotesk.className}>Pipeline Tracking</h2>
+          <p className={spaceGrotesk.className}>Keep track of all your job applications in one simple Kanban board. Move from applied to interview to offer seamlessly and efficiently.</p>
+        </div>
+      </section>
+
+      <section id="resource" className={styles.contentSection}>
+        <div className={styles.largeCard}>
+          <h2 className={spaceGrotesk.className}>Resources & Guides</h2>
+          <p className={spaceGrotesk.className}>Access a library of optimized resume templates and guides curated by top hiring managers to help you beat the ATS and get hired faster.</p>
+        </div>
+      </section>
+
+      <section id="about-us" className={styles.contentSection}>
+        <div className={styles.sectionCard}>
+          <h2 className={spaceGrotesk.className}>About Us</h2>
+          <p className={spaceGrotesk.className}>We built SmartHire because we were tired of getting ghosted by companies without any feedback. We reverse-engineered ATS logic to help you get hired faster and give you the competitive edge.</p>
+        </div>
       </section>
 
       {/* login modal */}
