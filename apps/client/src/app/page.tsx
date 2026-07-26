@@ -128,53 +128,57 @@ export default function LandingPage() {
       </section>
 
       <section id="product" className={styles.featureGrid}>
-        <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card1}`}>
-          <div className={styles.cardIcon}>
-            <Cpu size={24} strokeWidth={2} />
-          </div>
-          <h3 className={spaceGrotesk.className}>Semantic Intent Matching</h3>
-          <p className={spaceGrotesk.className}>
-            Our NLP engine aligns your experience with the hidden keywords recruiters actually search for.
-          </p>
-          <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: '85%' }}>
-              85% Match
+        <div className={styles.featureRow}>
+          <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card1}`}>
+            <div className={styles.cardIcon}>
+              <Cpu size={24} strokeWidth={2} />
+            </div>
+            <h3 className={spaceGrotesk.className}>Semantic Intent Matching</h3>
+            <p className={spaceGrotesk.className}>
+              Our NLP engine aligns your experience with the hidden keywords recruiters actually search for.
+            </p>
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{ width: '85%' }}>
+                85% Match
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={`${styles.cardBase} ${styles.cardYellow} ${styles.card2}`}>
-          <div className={styles.cardIconSquare}>
-            <TrendingUp size={24} strokeWidth={2} />
-          </div>
-          <h3 className={spaceGrotesk.className}>Tactical Tracker</h3>
-          <p className={spaceGrotesk.className}>
-            Visual pipelines for your applications.
-          </p>
-        </div>
-
-        <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card3}`}>
-          <div className={styles.cardIcon}>
-            <BarChart2 size={24} strokeWidth={2} />
-          </div>
-          <h3 className={spaceGrotesk.className}>Real-time Metrics</h3>
-          <p className={spaceGrotesk.className}>
-            Know where you stand instantly.
-          </p>
-        </div>
-
-        <div className={`${styles.cardBase} ${styles.cardTeal} ${styles.card4}`}>
-          <div className={styles.circleDeco}></div>
-          <div>
-            <h3 className={spaceGrotesk.className}>Instant AI Polish</h3>
+          <div className={`${styles.cardBase} ${styles.cardYellow} ${styles.card2}`}>
+            <div className={styles.cardIconSquare}>
+              <TrendingUp size={24} strokeWidth={2} />
+            </div>
+            <h3 className={spaceGrotesk.className}>Tactical Tracker</h3>
             <p className={spaceGrotesk.className}>
-              Rewrite weak bullets into high-impact achievements with one click. No fluff, just results.
+              Visual pipelines for your applications.
             </p>
           </div>
-          <button className={`${styles.tryItBtn} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
-            <Sparkles size={16} strokeWidth={3} />
-            Try it out
-          </button>
+        </div>
+
+        <div className={styles.featureRow}>
+          <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card3}`}>
+            <div className={styles.cardIcon}>
+              <BarChart2 size={24} strokeWidth={2} />
+            </div>
+            <h3 className={spaceGrotesk.className}>Real-time Metrics</h3>
+            <p className={spaceGrotesk.className}>
+              Know where you stand instantly.
+            </p>
+          </div>
+
+          <div className={`${styles.cardBase} ${styles.cardTeal} ${styles.card4}`}>
+            <div className={styles.circleDeco}></div>
+            <div>
+              <h3 className={spaceGrotesk.className}>Instant AI Polish</h3>
+              <p className={spaceGrotesk.className}>
+                Rewrite weak bullets into high-impact achievements with one click. No fluff, just results.
+              </p>
+            </div>
+            <button className={`${styles.tryItBtn} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
+              <Sparkles size={16} strokeWidth={3} />
+              Try it out
+            </button>
+          </div>
         </div>
       </section>
 
