@@ -3,6 +3,7 @@
   --ink: #000000;
   --yellow: #FFE600;
   --white: #FFFFFF;
+  --gray-footer: #E5E7EB;
   --border-w: 4px;
 }
 
@@ -12,6 +13,8 @@
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .pageContainer a { color: inherit; text-decoration: none; }
@@ -35,7 +38,7 @@
   padding: 12px 14px 12px 24px;
   border-radius: 999px;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
 }
 
 .logo { display: flex; align-items: center; gap: 10px; }
@@ -73,47 +76,72 @@
 }
 .startedBtn:hover { transform: scale(1.05); }
 
-
-/* ---------- hero ---------- */
-.hero {
-  position: relative;
-  max-width: 1000px; margin: 0 auto;
-  padding: 60px 5vw 40px;
-  text-align: center;
+/* ---------- 2-Column Hero ---------- */
+.heroGrid {
+  max-width: 1100px;
+  margin: 40px auto 100px;
+  padding: 0 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
   z-index: 10;
+  position: relative;
 }
 
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 9px;
-  background: var(--white); border: var(--border-w) solid var(--ink);
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.newBadge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--ink);
+  border: 3px solid var(--ink);
   border-radius: 999px; box-shadow: 4px 4px 0 var(--ink);
-  padding: 8px 20px; margin-bottom: 30px;
-  font-size: .85rem; letter-spacing: .05em; font-weight: 800; text-transform: uppercase;
+  padding: 6px 16px; margin-bottom: 30px;
+  font-size: .75rem; letter-spacing: .05em; font-weight: 800; text-transform: uppercase;
 }
 
-.title {
+.heroTitle {
   font-weight: 900;
-  font-size: clamp(3.5rem, 8vw, 6.5rem);
-  line-height: .9; letter-spacing: -0.02em; text-transform: uppercase;
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  line-height: .95; letter-spacing: -0.02em;
   margin-bottom: 24px;
   color: var(--ink);
 }
 
-.sub {
-  max-width: 600px; margin: 0 auto 40px;
-  font-size: 1.15rem; line-height: 1.6; color: rgba(0,0,0,0.8); font-weight: 500;
+.highlightBox {
+  display: inline-block;
+  background: var(--yellow);
+  padding: 0 12px;
+}
+
+.heroSubBox {
+  background: var(--white);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 24px;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.heroSub {
+  font-size: 1rem; line-height: 1.6; color: rgba(0,0,0,0.8); font-weight: 500;
 }
 
 .ctaGroup {
-  display: flex; gap: 16px; justify-content: center; align-items: center;
+  display: flex; gap: 16px; align-items: center;
 }
 
 .primaryCta {
   display: inline-flex; align-items: center; gap: 12px;
   background: var(--yellow); color: var(--ink);
   border: var(--border-w) solid var(--ink);
-  padding: 18px 36px;
-  font-weight: 900; font-size: 1.1rem;
+  padding: 16px 28px;
+  font-weight: 900; font-size: .95rem;
   text-transform: uppercase; letter-spacing: .02em;
   box-shadow: 6px 6px 0 var(--ink);
   transition: transform .15s ease, box-shadow .15s ease;
@@ -124,144 +152,213 @@
   display: inline-flex; align-items: center; gap: 12px;
   background: var(--white); color: var(--ink);
   border: var(--border-w) solid var(--ink);
-  padding: 18px 36px;
-  font-weight: 900; font-size: 1.1rem;
+  padding: 16px 28px;
+  font-weight: 900; font-size: .95rem;
   text-transform: uppercase; letter-spacing: .02em;
   box-shadow: 6px 6px 0 var(--ink);
   transition: transform .15s ease, box-shadow .15s ease;
 }
 .secondaryCta:hover { transform: translate(3px,3px); box-shadow: 0 0 0 var(--ink); }
 
-/* ---------- decorative ---------- */
-.decoArrow {
-  position: absolute;
-  top: 60%; right: 5%;
-  width: 140px;
-  opacity: 0.9;
-  z-index: 1;
-}
-
-.decoZigzag1 {
-  position: absolute;
-  top: 15%; left: 8%;
-  width: 80px;
-  z-index: 1;
-}
-.decoZigzag2 {
-  position: absolute;
-  bottom: 25%; right: 10%;
-  width: 60px;
-  z-index: 1;
-  transform: rotate(45deg);
-}
-.decoZigzag3 {
-  position: absolute;
-  top: 30%; right: 12%;
-  width: 70px;
-  z-index: 1;
-  transform: rotate(-25deg);
-}
-
-.decoStar {
-  position: absolute;
-  top: 65%; left: 15%;
-  width: 40px;
-  z-index: 1;
-}
-
-/* ---------- banner ---------- */
-.banner {
-  max-width: 900px; margin: 60px auto 100px;
-  background: var(--ink);
-  color: var(--white);
-  border: var(--border-w) solid var(--ink);
-  border-radius: 40px;
-  padding: 40px 60px;
-  text-align: center;
+.heroRight {
   position: relative;
-  z-index: 10;
-}
-.banner h2 {
-  font-weight: 900; font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  text-transform: uppercase; line-height: 1.1; letter-spacing: -0.01em;
-}
-
-.statsRow {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  position: absolute;
-  top: 15%; right: -5%;
-  background: var(--white); border: var(--border-w) solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
-  padding: 16px 24px;
-  z-index: 5;
-  transform: rotate(4deg);
-}
-.statCol {
-  display: flex; flex-direction: column; align-items: center;
-}
-.statCol b { font-size: 2rem; font-weight: 900; line-height: 1; }
-.statCol small { font-size: .65rem; font-weight: 800; text-transform: uppercase; margin-top: 4px; }
-
-/* ---------- content sections ---------- */
-.contentSection {
-  max-width: 1000px;
-  margin: 0 auto 60px;
-  padding: 0 5vw;
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  z-index: 10;
-  position: relative;
-}
-
-.sectionCard {
-  flex: 1;
-  min-width: 300px;
-  background: var(--white);
-  border: var(--border-w) solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
-  padding: 40px;
-  border-radius: 16px;
-}
-.sectionCard h2 {
-  font-weight: 900;
-  font-size: 2rem;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-.sectionCard p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  font-weight: 500;
-}
-
-.bgYellow {
-  background: var(--yellow);
-}
-
-.largeCard {
   width: 100%;
-  background: var(--white);
-  color: var(--ink);
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
   border: var(--border-w) solid var(--ink);
-  box-shadow: 8px 8px 0 var(--ink);
-  padding: 60px;
-  border-radius: 16px;
+  box-shadow: 12px 12px 0 var(--ink);
+  background: var(--white);
+  transform: rotate(2deg);
 }
-.largeCard h2 {
+
+.yellowCircleBehind {
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--yellow);
+  z-index: -1;
+}
+
+/* ---------- Feature Grid ---------- */
+.sectionTitleContainer {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sectionTitleBox {
+  display: inline-block;
+  background: var(--white);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 16px 32px;
+}
+
+.sectionTitle {
   font-weight: 900;
-  font-size: 2.5rem;
-  margin-bottom: 16px;
-  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
-.largeCard p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  font-weight: 500;
+
+.featureGrid {
+  max-width: 1100px;
+  margin: 0 auto 100px;
+  padding: 0 5vw;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: minmax(200px, auto);
+  gap: 20px;
+}
+
+.card1 { grid-column: 1 / 2; }
+.card2 { grid-column: 2 / 3; }
+.card3 { grid-column: 1 / 2; grid-row: 2; width: 50%; }
+.card4 { grid-column: 1 / 3; grid-row: 2; width: calc(50% - 10px); margin-left: calc(50% + 10px); }
+
+/* In a 4 card asymmetric grid, CSS Grid can be tricky if we want card3 (bottom left) and card4 (bottom right wide). 
+   Let's do grid-template-columns: 1fr 1fr 1fr; */
+.featureGrid {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+}
+.card1 { grid-column: 1 / 2; grid-row: 1 / 2; }
+.card2 { grid-column: 2 / 3; grid-row: 1 / 2; }
+.card3 { grid-column: 1 / 2; grid-row: 2 / 3; width: 50%; }
+.card4 { 
+  grid-column: 1 / 3; grid-row: 2 / 3; 
+  width: calc(100% - (100% / 3) + 10px); /* Just manual sizing or better, use 3 columns grid */
+}
+
+/* Better 3-column approach for featureGrid */
+.featureGrid {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.card1 { grid-column: 1 / 3; }
+.card2 { grid-column: 3 / 4; }
+.card3 { grid-column: 1 / 2; }
+.card4 { grid-column: 2 / 4; }
+
+.cardBase {
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardBase h3 {
+  font-weight: 800; font-size: 1.5rem; margin-bottom: 12px; color: var(--ink);
+}
+.cardBase p {
+  font-size: .95rem; line-height: 1.5; color: rgba(0,0,0,0.8); font-weight: 500;
+}
+
+.cardWhite { background: var(--white); }
+.cardYellow { background: var(--yellow); }
+.cardTeal { background: var(--bg); }
+
+.cardIcon {
+  width: 48px; height: 48px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.cardIconSquare {
+  width: 48px; height: 48px;
+  border: 2px solid var(--ink);
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 32px;
+  background: #f0f0f0;
+  border-radius: 999px;
+  margin-top: auto;
+  position: relative;
+  display: flex; align-items: center;
+}
+.progressFill {
+  height: 100%;
+  background: var(--bg);
+  border-radius: 999px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 12px;
+  font-weight: 800; font-size: .75rem;
+}
+
+.tryItBtn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); color: var(--ink);
+  border: 2px solid var(--ink);
+  padding: 8px 16px; font-weight: 800; font-size: .85rem;
+  margin-top: auto; align-self: flex-start;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.circleDeco {
+  position: absolute;
+  right: -50px; bottom: -50px;
+  width: 250px; height: 250px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 50%;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--gray-footer);
+  border-top: var(--border-w) solid var(--ink);
+  padding: 60px 5vw 40px;
+  margin-top: auto;
+}
+
+.footerGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.footerLeft {
+  max-width: 300px;
+}
+.footerLogo {
+  font-weight: 900; font-size: 1.5rem; margin-bottom: 16px; color: var(--ink);
+}
+.footerDesc {
+  font-size: .85rem; line-height: 1.5; color: rgba(0,0,0,0.7); font-weight: 500;
+}
+
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 12px;
+}
+.footerRight a {
+  font-size: .85rem; font-weight: 700; text-transform: uppercase; color: rgba(0,0,0,0.8);
+}
+.footerRight a:hover { color: var(--ink); }
+
+.footerBottom {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  text-align: right;
+  font-size: .7rem; font-weight: 600; color: rgba(0,0,0,0.5);
 }
 
 
@@ -282,7 +379,6 @@
   position: absolute; top: 14px; right: 14px; width: 30px; height: 30px;
   border: 2px solid var(--ink); background: var(--white); font-weight: 700; font-size: 1rem;
   display: flex; align-items: center; justify-content: center; line-height: 1;
-  transition: background .15s ease;
 }
 .modalClose:hover { background: var(--yellow); }
 .modalBadge {
@@ -305,10 +401,13 @@
 /* ---------- responsive ---------- */
 @media (max-width:900px){
   .header { display: none; }
-  .decoArrow, .decoZigzag1, .decoZigzag2, .decoZigzag3, .statsRow, .decoStar { display: none; }
-  .title { font-size: 3.5rem; }
-  .ctaGroup { flex-direction: column; }
-  .primaryCta, .secondaryCta { width: 100%; justify-content: center; }
-  .banner { padding: 30px 20px; border-radius: 20px; margin-top: 30px; }
-  .banner h2 { font-size: 1.4rem; }
+  .heroGrid { grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
+  .featureGrid { grid-template-columns: 1fr; gap: 20px; }
+  .card1, .card2, .card3, .card4 { grid-column: 1 / -1; width: 100%; }
+  .footerGrid { grid-template-columns: 1fr; text-align: left; }
+  .footerRight { align-items: flex-start; text-align: left; }
+  .footerBottom { text-align: left; margin-top: 30px; }
+  .heroTitle { font-size: 3.5rem; }
+  .ctaGroup { flex-direction: column; align-items: stretch; }
+  .primaryCta, .secondaryCta { justify-content: center; }
 }

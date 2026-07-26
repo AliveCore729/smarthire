@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuthStore } from "@/store/auth-store";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import { Loader2, ArrowRight, Sparkles } from "lucide-react";
+import { Loader2, ArrowRight, TrendingUp, Cpu, BarChart2, Sparkles } from "lucide-react";
 import styles from "./page.module.css";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"] });
@@ -61,24 +62,6 @@ export default function LandingPage() {
   return (
     <div className={`${styles.themeRoot} ${styles.pageContainer}`}>
       
-      {/* Decorative SVG overlays (mimicking the reference) */}
-      <svg className={styles.decoArrow} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 50 Q 50 10, 90 50" stroke="#000" strokeWidth="4" fill="none"/>
-        <path d="M75 35 L 90 50 L 75 65" stroke="#000" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      <svg className={styles.decoZigzag1} viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 25 L 25 0 L 50 25 L 75 0 L 100 25" stroke="#FFE600" strokeWidth="12" fill="none" strokeLinecap="square"/>
-      </svg>
-      <svg className={styles.decoZigzag2} viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 25 L 25 0 L 50 25 L 75 0 L 100 25" stroke="#FFE600" strokeWidth="12" fill="none" strokeLinecap="square"/>
-      </svg>
-      <svg className={styles.decoZigzag3} viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 25 L 25 0 L 50 25 L 75 0 L 100 25" stroke="#FFE600" strokeWidth="12" fill="none" strokeLinecap="square"/>
-      </svg>
-      <div className={styles.decoStar}>
-        <Sparkles size={40} fill="#FFE600" color="#000" strokeWidth={2} />
-      </div>
-
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
           <div className={styles.logo}>
@@ -100,63 +83,119 @@ export default function LandingPage() {
         </header>
       </div>
 
-      <section className={styles.hero}>
-        <div className={styles.eyebrow}><span className={styles.dot}></span> AI Resume Analyzer &amp; ATS Scoring</div>
-        <h1 className={`${styles.title} ${spaceGrotesk.className}`}>
-          Stop getting<br/>ghosted by the ATS.
-        </h1>
-        <p className={`${styles.sub} ${spaceGrotesk.className}`}>
-          Upload your resume once. SmartHire scores it against real ATS logic, matches it to open roles, and tracks every application in one pipeline — no more guessing why the callback never came.
-        </p>
-
-        <div className={styles.ctaGroup}>
-          <button className={`${styles.primaryCta} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
-            Get Started
-          </button>
-          <button className={`${styles.secondaryCta} ${spaceGrotesk.className}`}>
-            See How it Works
-            <ArrowRight size={20} strokeWidth={3} />
-          </button>
+      <section className={styles.heroGrid}>
+        <div className={styles.heroLeft}>
+          <div className={`${styles.newBadge} ${spaceGrotesk.className}`}>
+            🚀 NEW: AI Resume Parsing
+          </div>
+          <h1 className={`${styles.heroTitle} ${spaceGrotesk.className}`}>
+            Beat the <span className={styles.highlightBox}>ATS.</span><br/>Land the Job.
+          </h1>
+          <div className={styles.heroSubBox}>
+            <p className={`${styles.heroSub} ${spaceGrotesk.className}`}>
+              Stop guessing what the applicant tracking systems want. Our AI-driven engine optimizes your resume, matches semantic intent, and visually tracks your applications in an industrial-grade Kanban board.
+            </p>
+          </div>
+          <div className={styles.ctaGroup}>
+            <button className={`${styles.primaryCta} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
+              Start For Free
+              <ArrowRight size={20} strokeWidth={3} />
+            </button>
+            <button className={`${styles.secondaryCta} ${spaceGrotesk.className}`}>
+              See How it Works
+            </button>
+          </div>
         </div>
-
-        <div className={styles.statsRow}>
-          <div className={styles.statCol}>
-            <b className={spaceGrotesk.className}>10K</b>
-            <small className={jetbrainsMono.className}>Resumes Scanned</small>
+        <div className={styles.heroRight}>
+          <div className={styles.heroImageWrapper}>
+            <div className={styles.yellowCircleBehind}></div>
+            <Image 
+              src="/hero-illustration.png" 
+              alt="Robot scanning resume" 
+              width={600} 
+              height={600} 
+              className={styles.heroImage}
+              priority
+            />
           </div>
         </div>
       </section>
 
-      <section className={styles.banner}>
-        <h2 className={spaceGrotesk.className}>
-          Track your applications and<br/>enjoy ATS optimization every day.
-        </h2>
-      </section>
-
-      <section id="product" className={styles.contentSection}>
-        <div className={styles.sectionCard}>
-          <h2 className={spaceGrotesk.className}>Our Product</h2>
-          <p className={spaceGrotesk.className}>SmartHire automatically scores your resume against industry standards for ATS systems, so you always know exactly where you stand before applying.</p>
-        </div>
-        <div className={`${styles.sectionCard} ${styles.bgYellow}`}>
-          <h2 className={spaceGrotesk.className}>Pipeline Tracking</h2>
-          <p className={spaceGrotesk.className}>Keep track of all your job applications in one simple Kanban board. Move from applied to interview to offer seamlessly and efficiently.</p>
+      <section className={styles.sectionTitleContainer}>
+        <div className={styles.sectionTitleBox}>
+          <h2 className={`${styles.sectionTitle} ${spaceGrotesk.className}`}>Engineered for Execution</h2>
         </div>
       </section>
 
-      <section id="resource" className={styles.contentSection}>
-        <div className={styles.largeCard}>
-          <h2 className={spaceGrotesk.className}>Resources & Guides</h2>
-          <p className={spaceGrotesk.className}>Access a library of optimized resume templates and guides curated by top hiring managers to help you beat the ATS and get hired faster.</p>
+      <section id="product" className={styles.featureGrid}>
+        <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card1}`}>
+          <div className={styles.cardIcon}>
+            <Cpu size={24} strokeWidth={2} />
+          </div>
+          <h3 className={spaceGrotesk.className}>Semantic Intent Matching</h3>
+          <p className={spaceGrotesk.className}>
+            Our NLP engine aligns your experience with the hidden keywords recruiters actually search for.
+          </p>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: '85%' }}>
+              85% Match
+            </div>
+          </div>
+        </div>
+
+        <div className={`${styles.cardBase} ${styles.cardYellow} ${styles.card2}`}>
+          <div className={styles.cardIconSquare}>
+            <TrendingUp size={24} strokeWidth={2} />
+          </div>
+          <h3 className={spaceGrotesk.className}>Tactical Tracker</h3>
+          <p className={spaceGrotesk.className}>
+            Visual pipelines for your applications.
+          </p>
+        </div>
+
+        <div className={`${styles.cardBase} ${styles.cardWhite} ${styles.card3}`}>
+          <div className={styles.cardIcon}>
+            <BarChart2 size={24} strokeWidth={2} />
+          </div>
+          <h3 className={spaceGrotesk.className}>Real-time Metrics</h3>
+          <p className={spaceGrotesk.className}>
+            Know where you stand instantly.
+          </p>
+        </div>
+
+        <div className={`${styles.cardBase} ${styles.cardTeal} ${styles.card4}`}>
+          <div className={styles.circleDeco}></div>
+          <div>
+            <h3 className={spaceGrotesk.className}>Instant AI Polish</h3>
+            <p className={spaceGrotesk.className}>
+              Rewrite weak bullets into high-impact achievements with one click. No fluff, just results.
+            </p>
+          </div>
+          <button className={`${styles.tryItBtn} ${spaceGrotesk.className}`} onClick={() => setIsModalOpen(true)}>
+            <Sparkles size={16} strokeWidth={3} />
+            Try it out
+          </button>
         </div>
       </section>
 
-      <section id="about-us" className={styles.contentSection}>
-        <div className={styles.sectionCard}>
-          <h2 className={spaceGrotesk.className}>About Us</h2>
-          <p className={spaceGrotesk.className}>We built SmartHire because we were tired of getting ghosted by companies without any feedback. We reverse-engineered ATS logic to help you get hired faster and give you the competitive edge.</p>
+      <footer id="about-us" className={styles.footer}>
+        <div className={styles.footerGrid}>
+          <div className={styles.footerLeft}>
+            <div className={`${styles.footerLogo} ${spaceGrotesk.className}`}>SmartHire</div>
+            <p className={`${styles.footerDesc} ${spaceGrotesk.className}`}>
+              Building the structural foundation for your career success. No BS, just data.
+            </p>
+          </div>
+          <div className={styles.footerRight}>
+            <Link href="#product" className={jetbrainsMono.className}>Product</Link>
+            <Link href="#resource" className={jetbrainsMono.className}>Resources</Link>
+            <Link href="#about-us" className={jetbrainsMono.className}>About Us</Link>
+          </div>
         </div>
-      </section>
+        <div className={`${styles.footerBottom} ${jetbrainsMono.className}`}>
+          © 2024 SmartHire AI. All rights reserved.
+        </div>
+      </footer>
 
       {/* login modal */}
       <div 
